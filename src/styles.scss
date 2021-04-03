@@ -67,7 +67,7 @@
       height: 100%;
     }
 
-    .cont_title {
+    .section-title {
       position: absolute; // relative if you want to wrap the width around the text
       margin: auto;
       width: 100%;
@@ -78,30 +78,7 @@
       @include media-breakpoint-up(md) {
         bottom: 6vh;
       }
-      /*.letter-container{
-        position: relative;
-        width: 2vw;
-        height: 100px;
-        position: relative;
-        margin: auto;
-        .lettering{
-        transition: all 0.3s;
-        color: white;
 
-        span{
-          height: 10vw;
-          font-family: 'Economica', sans-serif;
-          font-size: 1.6vw;
-          text-shadow: 1px 2px 5px rgba(0,0,0,0.5);
-          position: absolute;
-          width: 15px;
-          left: 0;
-          top: 0;
-          transform-origin: bottom center;
-        }
-        @include rotated-text(11);
-        }
-      }*/
       h1 {
         text-transform: uppercase;
         color: white;
@@ -134,7 +111,7 @@
       }
     }
 
-    .cont_desc {
+    .section-description {
       position: relative;
       display: block;
       text-align: center;
@@ -158,22 +135,23 @@
         text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
       }
     }
+
     @include media-breakpoint-up(md) {
       &:hover {
         flex-grow: 1.8;
         transition: flex 0.2s;
 
-        & > .cont_title h1 {
+        & > .section-title h1 {
           font-size: 3vw;
           transition: font-size 0.4s;
         }
 
-        & > .cont_title h3 {
+        & > .section-title h3 {
           font-size: 1.6vw;
           transition: all 0.4s;
         }
 
-        & > .cont_desc {
+        & > .section-description {
           opacity: 1;
           padding-top: 4vh;
           transform: scale(1.5);
@@ -181,22 +159,6 @@
           transition-delay: 0s, 0.1s, 0s;
         }
       }
-    }
-    &.photography {
-      background: url("../img/photography.jpg") center;
-      background-size: cover;
-    }
-    &.design {
-      background: url("../img/design.jpg") center;
-      background-size: cover;
-    }
-    &.websites {
-      background: url("../img/websites.jpg") center;
-      background-size: cover;
-    }
-    &.info {
-      background: url("../img/info.jpg") center;
-      background-size: cover;
     }
   }
 }

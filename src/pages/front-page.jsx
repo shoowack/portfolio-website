@@ -20,11 +20,11 @@ export default function FrontPage() {
             target={openInNewWidnow && `_blank`}
             className="section"
           >
-            <div className="cont_title">
+            <div className="section-title">
               {title && <h1>{title}</h1>}
               {subscript && <h3>{subscript}</h3>}
             </div>
-            <div className="cont_desc">
+            <div className="section-description">
               <p>{superscript}</p>
             </div>
             {bgImg && <img className="section-bg-img" src={bgImg} alt="" />}
