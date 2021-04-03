@@ -1,11 +1,8 @@
 {
-  "name": "react",
+  "name": "portfolio-website",
   "version": "1.0.0",
-  "description": "React example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
+  "description": "",
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "bootstrap": "4.6.0",
