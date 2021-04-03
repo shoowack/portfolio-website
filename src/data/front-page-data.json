@@ -1,0 +1,24 @@
+[
+  {
+    "link": "http://ii.photography/",
+    "openInNewWidnow": true,
+    "title": "Photography",
+    "subscript": "ii.photography",
+    "superscript": "Enjoy my photography portfolio!",
+    "bgImg": "https://shoowack.com/wp-content/uploads/2018/09/photography.jpg"
+  },
+  {
+    "link": "/designs",
+    "title": "Design",
+    "subscript": "Collection of iOS and Android apps I've been working on",
+    "superscript": "UX/UI Stuff",
+    "bgImg": "https://shoowack.com/wp-content/uploads/2018/09/design.jpg"
+  },
+  {
+    "link": "/websites",
+    "title": "Websites",
+    "subscript": "Latest projects",
+    "superscript": "Interesting web projects I was involved in",
+    "bgImg": "https://shoowack.com/wp-content/uploads/2018/09/websites.jpg"
+  }
+]
