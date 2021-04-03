@@ -8,8 +8,8 @@ export default function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={pages.FrontPage} />
-        <Route path="/designs" component={pages.DesignPage} />
-        <Route path="/websites" component={pages.WebsitesPage} />
+        <Route exact path="/designs" component={pages.DesignPage} />
+        <Route exact path="/websites" component={pages.WebsitesPage} />
       </Switch>
     </BrowserRouter>
   );
