@@ -1,0 +1,44 @@
+{
+  "name": "Ivan Šuvak Martinović",
+  "description": "Front-End Web Designer, iOS and Android Mobile App Designer, UX/UI, WordPress, Photographer Currently in Montréal, Canada, looking for a new and challenging position as a Front-end developer or UI/UX designer where I can create digital magic and elevate user experience to the next level.<br/><br/><strong>Working on a closed work permit in Canada</strong> and willing to relocate anywhere in Canada.",
+  "headerInfoLinks": [
+    {
+      "id": "mail",
+      "link": "mailto:isuvak@gmail.com",
+      "tooltipText": "E-mail me",
+      "icon": ["fas", "at"],
+      "color": "#20C05C"
+    },
+    {
+      "id": "skype",
+      "link": "skype:shoowack?chat",
+      "tooltipText": "Skype me",
+      "icon": ["fab", "skype"],
+      "color": "#00AEF3"
+    },
+    {
+      "id": "linkedin",
+      "link": "https://www.linkedin.com/in/ivan-suvak-martinovic/",
+      "tooltipText": "LinkedIn Profile",
+      "icon": ["fab", "linkedin"],
+      "newTab": true,
+      "color": "#007EBB"
+    },
+    {
+      "id": "photography",
+      "link": "http://ii.photography/",
+      "tooltipText": "Photography<br>Portfolio",
+      "icon": ["fas", "camera"],
+      "newTab": true,
+      "color": "#7F4DA0"
+    },
+    {
+      "id": "cv",
+      "link": "https://shoowack.com/wp-content/uploads/2018/02/Ivan-Suvak-Martinovic-CV.pdf",
+      "tooltipText": "Download CV",
+      "icon": ["fas", "file"],
+      "size": "1x",
+      "color": "#FF5700"
+    }
+  ]
+}

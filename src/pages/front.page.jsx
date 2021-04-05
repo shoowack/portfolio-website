@@ -1,5 +1,5 @@
 export default function FrontPage() {
-  let frontPageData = require("./../data/front-page-data.json");
+  const frontPageData = require("./../data/front-page-data.json");
 
   return (
     <div className="site-main">

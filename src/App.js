@@ -7,21 +7,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={(props) => <pages.FrontPage {...props} />}
-        />
-        <Route
-          exact
-          path="/designs"
-          render={(props) => <pages.DesignPage {...props} />}
-        />
-        <Route
-          exact
-          path="/websites"
-          render={(props) => <pages.WebsitesPage {...props} />}
-        />
+        <Route exact path="/" component={pages.FrontPage} />
+        <Route path="/designs" component={pages.DesignPage} />
+        <Route path="/websites" component={pages.WebsitesPage} />
       </Switch>
     </BrowserRouter>
   );
