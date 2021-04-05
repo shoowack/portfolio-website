@@ -4,6 +4,7 @@
   "headerInfoLinks": [
     {
       "id": "mail",
+      "key": "mail",
       "link": "mailto:isuvak@gmail.com",
       "tooltipText": "E-mail me",
       "icon": ["fas", "at"],
@@ -11,6 +12,7 @@
     },
     {
       "id": "skype",
+      "key": "skype",
       "link": "skype:shoowack?chat",
       "tooltipText": "Skype me",
       "icon": ["fab", "skype"],
@@ -18,6 +20,7 @@
     },
     {
       "id": "linkedin",
+      "key": "linkedin",
       "link": "https://www.linkedin.com/in/ivan-suvak-martinovic/",
       "tooltipText": "LinkedIn Profile",
       "icon": ["fab", "linkedin"],
@@ -26,6 +29,7 @@
     },
     {
       "id": "photography",
+      "key": "photography",
       "link": "http://ii.photography/",
       "tooltipText": "Photography<br>Portfolio",
       "icon": ["fas", "camera"],
@@ -34,10 +38,10 @@
     },
     {
       "id": "cv",
+      "key": "cv",
       "link": "https://shoowack.com/wp-content/uploads/2018/02/Ivan-Suvak-Martinovic-CV.pdf",
       "tooltipText": "Download CV",
       "icon": ["fas", "file"],
-      "size": "1x",
       "color": "#FF5700"
     }
   ]

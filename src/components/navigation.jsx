@@ -23,20 +23,9 @@ export default function Navigation() {
             </div>
             <div className="mr-auto">{name && <h1>{name}</h1>}</div>
             <div className="header-info-links">
-              {headerInfoLinks.map((headerLink) => {
-                const { id, link, tooltipText, icon, color } = headerLink;
-
-                return (
-                  <HeaderInfoLink
-                    id={id}
-                    key={id}
-                    link={link}
-                    tooltipText={tooltipText}
-                    icon={icon}
-                    color={color}
-                  />
-                );
-              })}
+              {headerInfoLinks.map((headerLink) => (
+                <HeaderInfoLink {...headerLink} />
+              ))}
             </div>
           </div>
         </div>

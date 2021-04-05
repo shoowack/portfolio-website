@@ -257,13 +257,18 @@ section {
         width: 36px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        opacity: 0;
-        animation: preload 1s ease-in-out;
-        animation-fill-mode: forwards;
+        position: relative;
+
+        .svg-inline--fa {
+          position: absolute;
+          top: 0;
+          opacity: 0;
+          animation: preload 1s ease-in-out;
+          animation-fill-mode: forwards;
+        }
 
         @for $i from 1 through 10 {
-          &:nth-child(#{$i}n) {
+          &:nth-child(#{$i}n) .svg-inline--fa {
             animation-delay: #{$i * 0.1}s;
           }
         }
