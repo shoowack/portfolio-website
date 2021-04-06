@@ -20,6 +20,24 @@ export default function Section({
     initialSlide: 0,
     // prevArrow={<div />}
     // nextArrow={<div />}
+    customPaging: function (i) {
+      return (
+        <span>
+          <div
+            className="owl-dot-el-1"
+            style={{ backgroundColor: bgColor }}
+          ></div>
+          <div
+            className="owl-dot-el-2"
+            style={{ backgroundColor: bgColor }}
+          ></div>
+          <div
+            className="owl-dot-el-3"
+            style={{ backgroundColor: bgColor }}
+          ></div>
+        </span>
+      );
+    },
     responsive: [
       {
         breakpoint: 1600,
@@ -72,7 +90,7 @@ export default function Section({
 
             {console.log(gallery[1])}
 
-            <Slider {...sliderOptions}>
+            <Slider {...sliderOptions} className={gallery[0]}>
               {gallery[1].map((image) => (
                 <img src={images[image]} alt="" />
               ))}

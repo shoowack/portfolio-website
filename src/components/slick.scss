@@ -69,13 +69,13 @@
   float: left;
   height: 100%;
   min-height: 1px;
-  padding: 40px;
+  padding: 40px 40px 60px 40px;
 
   img {
     display: block;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 35px 55px rgba(0, 0, 0, 0.08), 0 25px 63px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 35px 35px rgba(0, 0, 0, 0.08), 0 25px 35px rgba(0, 0, 0, 0.1);
   }
   
   &.slick-loading img {
