@@ -1,3 +1,5 @@
+import * as images from "./../img";
+
 export default function FrontPage() {
   const frontPageData = require("./../data/front-page-data.json");
 
@@ -27,7 +29,9 @@ export default function FrontPage() {
             <div className="section-description">
               <p>{superscript}</p>
             </div>
-            {bgImg && <img className="section-bg-img" src={bgImg} alt="" />}
+            {bgImg && (
+              <img className="section-bg-img" src={images[bgImg]} alt="" />
+            )}
           </a>
         );
       })}

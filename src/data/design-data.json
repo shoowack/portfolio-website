@@ -1,0 +1,38 @@
+[
+  {
+    "key": "nearlock",
+    "bgColor": "#f9f9f9",
+    "ui": "darker",
+    "title": "Near Lock App",
+    "description": "Use your iPhone to lock and unlock your Mac automatically. When you walk away from your Mac, it will be automatically locked. Once you approach your workplace, Near Lock will unlock your Mac. You can easily set the distance on which your Mac should automatically be locked or unlocked. For additional security use Touch ID or Apple Watch to confirm each Mac login.<br><br><mark>Design, Branding, UI and UX</mark> for iPhone, Mac and Apple Watch was my role, as well as making a landing <a href=\"https://nearlock.me/\" target=\"_blank\">website</a> for the app, using <strong>Photoshop</strong> and <strong>Sketch</strong> for graphics, <strong>GIT</strong> as version control system, <strong>After Effects</strong> for <strong>Lottie</strong> animations and <strong>InVision</strong> for prototyping.",
+    "gallery": {
+      "iphone": ["nearlock-iphone-01.jpg", "nearlock-iphone-02.jpg"],
+      "desktop": ["nearlock-desktop-01.jpg"]
+    }
+  },
+  {
+    "key": "calendar",
+    "bgColor": "#f24333",
+    "ui": "darker",
+    "title": "Calendar App",
+    "description": "Another Calendar app :) We wanted this to be very <mark>customizable</mark>, which means you can choose between light and dark theme, colors, and day views. Fast scrollable bar at the top, with current day that is always visible. Floating action button allows new entry from almost every screen. Below you can see iPhone and iPad versions of the App, portrait, landscape and split screen.",
+    "gallery": {
+      "iphone": [
+        "calendarIphone01",
+        "calendarIphone02",
+        "calendarIphone03",
+        "calendarIphone04",
+        "calendarIphone05",
+        "calendarIphone06",
+        "calendarIphone07",
+        "calendarIphone08"
+      ],
+      "ipad": ["calendarIpadPortrait01"],
+      "ipadlandscape": [
+        "calendarIpadLandscape01",
+        "calendarIpadLandscape02",
+        "calendarIpadLandscape03"
+      ]
+    }
+  }
+]

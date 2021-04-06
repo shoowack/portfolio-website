@@ -1,10 +1,16 @@
 import Navigation from "../components/navigation";
+import Section from "../components/section";
 
 export default function DesignPage() {
+  const designData = require("./../data/design-data.json");
+
   return (
     <>
       <Navigation />
-      <h1>Design Page</h1>
+
+      {designData.map((design) => (
+        <Section {...design} />
+      ))}
     </>
   );
 }
