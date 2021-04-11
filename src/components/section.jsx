@@ -88,8 +88,6 @@ export default function Section({
                 (gallery[0] === "ipadlandscape" && "iPad Landscape")}
             </h3>
 
-            {console.log(gallery[1])}
-
             <Slider {...sliderOptions} className={gallery[0]}>
               {gallery[1].map((image) => (
                 <img src={images[image]} alt="" />
