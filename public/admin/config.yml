@@ -19,10 +19,9 @@ collections:
       - {label: "Images", name: "thumbnail", widget: "image", allow_multiple: true }
       - {label: "Section Color", name: "bgColor", widget: "color"}
       - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Gallery",
-          name: "galleryImages",
-          widget: "list",
-          fields:
-            - {label: "Source", name: "src", widget: "string"}
-            - {label: "Alt Text", name: "alt", widget: "string"}
-        }
+      - label: "Gallery",
+        name: "galleryImages",
+        widget: "list",
+        fields:
+          - {label: "Source", name: "src", widget: "string"}
+          - {label: "Alt Text", name: "alt", widget: "string"}
