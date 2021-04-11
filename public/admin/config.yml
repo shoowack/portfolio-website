@@ -21,8 +21,9 @@ collections:
         name: "thumbnail",
         widget: "image",
         media_library:
-          config:
-            multiple: true
+          - { config:
+            - { multiple: true }
+            }
         }
       - {label: "Section Color", name: "bgColor", widget: "color"}
       - {label: "Body", name: "body", widget: "markdown"}
