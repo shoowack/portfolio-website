@@ -25,4 +25,9 @@ collections:
         name: galleryImages
         widget: list
         fields:
-          - {label: Image, name: image, widget: image}
+          - label: "Featured Image"
+            name: "thumbnail"
+            widget: "image"
+            media_library:
+              config:
+                multiple: true
