@@ -16,15 +16,7 @@ collections:
       - {label: "Layout", name: "layout", default: "darker"}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {
-        label: "Images",
-        name: "thumbnail",
-        widget: "image",
-        media_library:
-          - { config:
-            - { multiple: true }
-            }
-        }
+      - {label: "Images", name: "thumbnail", widget: "image", allow_multiple: true }
       - {label: "Section Color", name: "bgColor", widget: "color"}
       - {label: "Body", name: "body", widget: "markdown"}
       - {
