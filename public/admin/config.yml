@@ -22,7 +22,7 @@ collections:
         widget: "image",
         media_library:
           config:
-            - { multiple: true }
+            multiple: true
         }
       - {label: "Section Color", name: "bgColor", widget: "color"}
       - {label: "Body", name: "body", widget: "markdown"}
