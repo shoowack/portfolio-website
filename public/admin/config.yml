@@ -13,9 +13,24 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
-      - {label: "Layout", name: "layout", widget: "hidden", default: "darker"}
-      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Layout", name: "layout", default: "darker"}
+      - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {
+        label: "Images",
+        name: "thumbnail",
+        widget: "image",
+        media_library:
+          config:
+            - { multiple: true }
+        }
       - {label: "Section Color", name: "bgColor", widget: "color"}
       - {label: "Body", name: "body", widget: "markdown"}
+      - {
+        label: "Gallery",
+        name: "galleryImages",
+        widget: "list",
+        fields:
+          - { label: "Source", name: "src", widget: "string" }
+          - { label: "Alt Text", name: "alt", widget: "string" }
+        }
