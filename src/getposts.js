@@ -28,6 +28,7 @@ const getPosts = async () => {
             metadata.forEach((line) => {
               obj[line.split(": ")[0]] = line.split(": ")[1];
             });
+            console.log(obj);
 
             return obj;
           }
@@ -47,6 +48,12 @@ const getPosts = async () => {
           layout: metadata.layout ? metadata.layout : "No layout given",
           title: metadata.title ? metadata.title : "No title given",
           date: metadata.date ? metadata.date : "No date given",
+          galleryImages: metadata.galleryImages
+            ? metadata.galleryImages
+            : "No galleries",
+          bgColor: metadata.bgColor
+            ? metadata.bgColor.replace(/['"]+/g, "")
+            : "No Background color specified",
           content: content ? content : "No content given"
         };
         postlist.push(post);

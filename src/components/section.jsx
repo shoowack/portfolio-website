@@ -7,9 +7,9 @@ import "./../components/slick-theme.scss";
 export default function Section({
   key,
   bgColor = "#ffffff",
-  ui,
+  layout,
   title,
-  description,
+  content,
   gallery
 }) {
   const sliderOptions = {
@@ -73,12 +73,12 @@ export default function Section({
   };
 
   return (
-    <section key={key} className={ui} style={{ background: bgColor }}>
+    <section key={key} className={layout} style={{ background: bgColor }}>
       <h2>{title}</h2>
 
-      <p className="desc" dangerouslySetInnerHTML={{ __html: description }}></p>
+      <p className="desc" dangerouslySetInnerHTML={{ __html: content }}></p>
 
-      {Object.entries(gallery).map((gallery) => {
+      {/* {Object.entries(gallery).map((gallery) => {
         return (
           <>
             <h3>
@@ -95,7 +95,7 @@ export default function Section({
             </Slider>
           </>
         );
-      })}
+      })} */}
     </section>
   );
 }
@@ -103,8 +103,8 @@ export default function Section({
 Section.propTypes = {
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   bgColor: PropTypes.string,
-  ui: PropTypes.string,
+  layout: PropTypes.string,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  content: PropTypes.string,
   gallery: PropTypes.object
 };
