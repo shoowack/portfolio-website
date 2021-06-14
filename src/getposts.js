@@ -1,7 +1,8 @@
-import fs from "fs";
 import matter from "gray-matter";
-import path from "path";
 import yaml from "js-yaml";
+
+const path = require("path");
+const fs = require("fs");
 
 const getPosts = async () => {
   const dirPath = path.join(__dirname, `../public/_designs/design`);
