@@ -4,7 +4,6 @@ import Section from "../components/section";
 import getPosts from "../getposts";
 
 export default function DesignPage() {
-  const designData = require("./../data/design-data.json");
   const [posts, setPosts] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,15 +31,9 @@ export default function DesignPage() {
     <>
       <Navigation />
 
-      {console.log(posts)}
-
-      {posts?.map((post) => (
-        <Section {...post} />
+      {posts?.map((post, i) => (
+        <Section key={i} {...post} />
       ))}
-
-      {/* {designData.map((design) => (
-        <Section {...design} />
-      ))} */}
     </>
   );
 }

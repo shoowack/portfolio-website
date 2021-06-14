@@ -1,66 +1,49 @@
-const path = require("path");
-const fs = require("fs");
-
-const dirPath = path.join(__dirname, "../public/_designs/design");
-let postlist = [];
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
+import yaml from "js-yaml";
 
 const getPosts = async () => {
-  await fs.readdir(dirPath, (err, files) => {
-    if (err) {
-      return console.log("failed to list contents of directory: " + err);
-    }
-    files.forEach((file, i) => {
-      let obj = {};
-      let post;
-      fs.readFile(`${dirPath}/${file}`, "utf8", (err, contents) => {
-        const getMetadataIndices = (acc, elem, i) => {
-          if (/^---/.test(elem)) {
-            acc.push(i);
-          }
-          return acc;
-        };
-        const parseMetadata = ({ lines, metadataIndices }) => {
-          if (metadataIndices.length > 0) {
-            let metadata = lines.slice(
-              metadataIndices[0] + 1,
-              metadataIndices[1]
-            );
-            metadata.forEach((line) => {
-              obj[line.split(": ")[0]] = line.split(": ")[1];
-            });
-            console.log(obj);
+  const dirPath = path.join(__dirname, `../public/_designs/design`);
+  // Get file names under /posts
+  const fileNames = fs.readdirSync(dirPath);
 
-            return obj;
-          }
-        };
-        const parseContent = ({ lines, metadataIndices }) => {
-          if (metadataIndices.length > 0) {
-            lines = lines.slice(metadataIndices[1] + 1, lines.length);
-          }
-          return lines.join("\n");
-        };
-        const lines = contents.split("\n");
-        const metadataIndices = lines.reduce(getMetadataIndices, []);
-        const metadata = parseMetadata({ lines, metadataIndices });
-        const content = parseContent({ lines, metadataIndices });
-        post = {
-          id: i + 1,
-          layout: metadata.layout ? metadata.layout : "No layout given",
-          title: metadata.title ? metadata.title : "No title given",
-          date: metadata.date ? metadata.date : "No date given",
-          galleryImages: metadata.galleryImages
-            ? metadata.galleryImages
-            : "No galleries",
-          bgColor: metadata.bgColor
-            ? metadata.bgColor.replace(/['"]+/g, "")
-            : "No Background color specified",
-          content: content ? content : "No content given"
-        };
-        postlist.push(post);
+  const allPostsData = fileNames
+    .filter((it) => it.endsWith(".md"))
+    .map((fileName) => {
+      // Read markdown file as string
+      const fullPath = path.join(dirPath, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+
+      // Use gray-matter to parse the post metadata section
+      const matterResult = matter(fileContents, {
+        engines: {
+          yaml: (s) => yaml.safeLoad(s, { schema: yaml.JSON_SCHEMA })
+        }
       });
+
+      const matterData = matterResult.data;
+
+      const slug = fileName.replace(/\.md$/, "");
+
+      // Validate slug string
+      // if (matterData.slug !== slug) {
+      //   throw "slug field not match with the path of its content source";
+      // }
+
+      return matterResult;
     });
-  });
-  return postlist;
+
+  // // Sort posts by date
+  // postCache = allPostsData.sort((a, b) => {
+  //   if (a.date < b.date) {
+  //     return 1;
+  //   } else {
+  //     return -1;
+  //   }
+  // });
+  // return postCache;
+  return allPostsData;
 };
 
 export default getPosts();

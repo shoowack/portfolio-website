@@ -4,14 +4,8 @@ import Slider from "react-slick";
 import "./../components/slick.scss";
 import "./../components/slick-theme.scss";
 
-export default function Section({
-  key,
-  bgColor = "#ffffff",
-  layout,
-  title,
-  content,
-  gallery
-}) {
+export default function Section({ data, content }) {
+  const { bgColor = "#ffffff", layout, title, gallery } = data;
   const sliderOptions = {
     infinite: true,
     slidesToShow: 6,
@@ -73,7 +67,7 @@ export default function Section({
   };
 
   return (
-    <section key={key} className={layout} style={{ background: bgColor }}>
+    <section className={layout} style={{ background: bgColor }}>
       <h2>{title}</h2>
 
       <p className="desc" dangerouslySetInnerHTML={{ __html: content }}></p>
@@ -101,10 +95,6 @@ export default function Section({
 }
 
 Section.propTypes = {
-  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  bgColor: PropTypes.string,
-  layout: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string,
-  gallery: PropTypes.object
+  data: PropTypes.object.isRequired,
+  content: PropTypes.string
 };
