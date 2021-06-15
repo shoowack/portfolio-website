@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import Navigation from "../components/navigation";
 import Section from "../components/section";
-import getPosts from "../getposts";
+import getPosts from "./../getposts";
 
 export default function DesignPage() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPosts.then((posts) => setPosts(posts)).then(setIsLoading(false));
+    getPosts
+      .then((posts) => {
+        setPosts(posts);
+      })
+      .then(setIsLoading(false));
   }, [posts]);
 
   if (isLoading) {
@@ -31,9 +35,12 @@ export default function DesignPage() {
     <>
       <Navigation />
 
-      {posts?.map((post, i) => (
-        <Section key={i} {...post} />
-      ))}
+      {posts &&
+        posts?.map((post, i) => {
+          console.log(post, "working on stuff");
+
+          return <Section key={i} {...post} />;
+        })}
     </>
   );
 }

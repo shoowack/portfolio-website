@@ -4,8 +4,13 @@ import Slider from "react-slick";
 import "./../components/slick.scss";
 import "./../components/slick-theme.scss";
 
-export default function Section({ data, content }) {
-  const { bgColor = "#ffffff", layout, title, gallery } = data;
+export default function Section({
+  bgColor = "#ffffff",
+  layout,
+  title,
+  content,
+  galleryImages
+}) {
   const sliderOptions = {
     infinite: true,
     slidesToShow: 6,
@@ -72,29 +77,34 @@ export default function Section({ data, content }) {
 
       <p className="desc" dangerouslySetInnerHTML={{ __html: content }}></p>
 
-      {/* {Object.entries(gallery).map((gallery) => {
-        return (
-          <>
-            <h3>
-              {(gallery[0] === "iphone" && "iPhone") ||
-                (gallery[0] === "ipad" && "iPad") ||
-                (gallery[0] === "desktop" && "Desktop App") ||
-                (gallery[0] === "ipadlandscape" && "iPad Landscape")}
-            </h3>
+      {Array.isArray(galleryImages) &&
+        Object.entries(galleryImages).map((gallery) => {
+          console.log(gallery);
+          return (
+            <>
+              <h3>
+                {(gallery[0] === "iphone" && "iPhone") ||
+                  (gallery[0] === "ipad" && "iPad") ||
+                  (gallery[0] === "desktop" && "Desktop App") ||
+                  (gallery[0] === "ipadlandscape" && "iPad Landscape")}
+              </h3>
 
-            <Slider {...sliderOptions} className={gallery[0]}>
-              {gallery[1].map((image) => (
-                <img src={images[image]} alt="" />
-              ))}
-            </Slider>
-          </>
-        );
-      })} */}
+              <Slider {...sliderOptions} className={gallery[0]}>
+                {Object.entries(gallery[1]).map((image) => (
+                  <img src={images[image]} alt="" />
+                ))}
+              </Slider>
+            </>
+          );
+        })}
     </section>
   );
 }
 
 Section.propTypes = {
-  data: PropTypes.object.isRequired,
-  content: PropTypes.string
+  bgColor: PropTypes.string,
+  layout: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  gallery: PropTypes.object
 };

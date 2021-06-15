@@ -1,50 +1,50 @@
+import fs from "fs";
 import matter from "gray-matter";
-import yaml from "js-yaml";
+import path from "path";
 
-const path = require("path");
-const fs = require("fs");
+const dirPath = path.join(__dirname, "../public/_designs/design");
+let postlist = [];
 
 const getPosts = async () => {
-  const dirPath = path.join(__dirname, `../public/_designs/design`);
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(dirPath);
+  fs.readdir(dirPath, (err, files) => {
+    if (err) {
+      return console.log("failed to list contents of directory: " + err);
+    }
+    files.forEach((file, i) => {
+      let post;
+      fs.readFile(`${dirPath}/${file}`, "utf8", (err, contents) => {
+        // Use gray-matter to parse the post metadata section
 
-  const allPostsData = fileNames
-    .filter((it) => it.endsWith(".md"))
-    .map((fileName) => {
-      // Read markdown file as string
-      const fullPath = path.join(dirPath, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
+        const matterResult = matter(contents);
 
-      // Use gray-matter to parse the post metadata section
-      const matterResult = matter(fileContents, {
-        engines: {
-          yaml: (s) => yaml.safeLoad(s, { schema: yaml.JSON_SCHEMA })
-        }
+        post = {
+          id: i + 1,
+          layout: matterResult.data.layout
+            ? matterResult.data.layout
+            : "No layout given",
+          title: matterResult.data.title
+            ? matterResult.data.title
+            : "No title given",
+          date: matterResult.data.date
+            ? matterResult.data.date
+            : "No date given",
+          bgColor: matterResult.data.bgColor
+            ? matterResult.data.bgColor
+            : "No background color given",
+          galleryImages: matterResult.data.galleryImages
+            ? matterResult.data.galleryImages
+            : "No gallery images",
+          content: matterResult.content
+            ? matterResult.content
+            : "No content given"
+        };
+
+        postlist.push(post);
       });
-
-      const matterData = matterResult.data;
-
-      const slug = fileName.replace(/\.md$/, "");
-
-      // Validate slug string
-      // if (matterData.slug !== slug) {
-      //   throw "slug field not match with the path of its content source";
-      // }
-
-      return matterResult;
     });
+  });
 
-  // // Sort posts by date
-  // postCache = allPostsData.sort((a, b) => {
-  //   if (a.date < b.date) {
-  //     return 1;
-  //   } else {
-  //     return -1;
-  //   }
-  // });
-  // return postCache;
-  return allPostsData;
+  return postlist;
 };
 
 export default getPosts();
