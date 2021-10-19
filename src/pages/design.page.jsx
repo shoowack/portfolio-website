@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
 import Navigation from "../components/navigation";
-import Section from "../components/section";
-import getPosts from "./../getposts";
+import RichText from "@madebyconnor/rich-text-to-jsx";
+const contentful = require("contentful");
 
 export default function DesignPage() {
-  const [posts, setPosts] = useState(null);
+  const [items, setItems] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPosts
-      .then((posts) => {
-        setPosts(posts);
+    const client = contentful.createClient({
+      space: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+    });
+
+    client
+      .getEntries({
+        content_type: "entry",
+        "fields.type": "Design"
       })
-      .then(setIsLoading(false));
-  }, [posts]);
+      .then((entry) => {
+        setItems(entry.items);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   if (isLoading) {
     return (
@@ -35,12 +45,40 @@ export default function DesignPage() {
     <>
       <Navigation />
 
-      {posts &&
-        posts?.map((post, i) => {
-          console.log(post, "working on stuff");
+      {items.map((item) => {
+        const {
+          title,
+          type,
+          description,
+          gallery,
+          backgroundColor
+        } = item.fields;
 
-          return <Section key={i} {...post} />;
-        })}
+        return (
+          <section style={{ backgroundColor: `#${backgroundColor}` }}>
+            <h2>{title}</h2>
+            <div className="desc">
+              <RichText richText={description} />
+            </div>
+            {gallery?.map((item) => {
+              const { title, type, images } = item.fields;
+
+              return (
+                <>
+                  <h3>{title}</h3>
+                  {images?.map((image) => {
+                    const {
+                      file: { url }
+                    } = image.fields;
+
+                    return <img src={url} alt="" />;
+                  })}
+                </>
+              );
+            })}
+          </section>
+        );
+      })}
     </>
   );
 }

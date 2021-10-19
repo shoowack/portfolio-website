@@ -294,18 +294,19 @@ p {
   font-family: 'Raleway', Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
 
-  &.desc {
-    width: 90%;
-    margin: 10px auto 30px auto;
+.desc {
+  width: 90%;
+  margin: 10px auto 30px auto;
 
-    @include media-breakpoint-up(md) {
-      margin: 20px auto 50px auto;
-      text-align: center;
-      width: 80%;
-    }
+  @include media-breakpoint-up(md) {
+    margin: 20px auto 50px auto;
+    text-align: center;
+    width: 80%;
   }
 }
+
 
 mark {
   padding: 2px 5px;
