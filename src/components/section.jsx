@@ -7,6 +7,24 @@ import { getContrast } from "./../getContrast";
 import "./../components/slick.scss";
 import "./../components/slick-theme.scss";
 
+// function SampleNextArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         display: "block",
+//         background: "red",
+//         bottom: "10px",
+//         top: "unset"
+//         postMessage
+//       }}
+//       onClick={onClick}
+//     />
+//   );
+// }
+
 export default function Section({
   backgroundColor = "#ffffff",
   title,
@@ -19,22 +37,22 @@ export default function Section({
     dots: true,
     centerMode: true,
     initialSlide: 0,
-    // prevArrow={<div />}
-    // nextArrow={<div />}
+    prevArrow: <div />,
+    // nextArrow: <SampleNextArrow />,
     customPaging: function (i) {
       return (
         <span>
           <div
             className="owl-dot-el-1"
-            style={{ backgroundColor: backgroundColor }}
+            style={{ backgroundColor: `#${backgroundColor}` }}
           ></div>
           <div
             className="owl-dot-el-2"
-            style={{ backgroundColor: backgroundColor }}
+            style={{ backgroundColor: `#${backgroundColor}` }}
           ></div>
           <div
             className="owl-dot-el-3"
-            style={{ backgroundColor: backgroundColor }}
+            style={{ backgroundColor: `#${backgroundColor}` }}
           ></div>
         </span>
       );
@@ -90,7 +108,10 @@ export default function Section({
         return (
           <>
             <h3>{title}</h3>
-            <Slider {...sliderOptions}>
+            <Slider
+              {...sliderOptions}
+              className={type.replace(/ /g, "-").toLowerCase()}
+            >
               {images?.map((image) => {
                 const {
                   file: { url }

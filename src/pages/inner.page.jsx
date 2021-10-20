@@ -3,7 +3,7 @@ import Navigation from "../components/navigation";
 import Section from "../components/section";
 const contentful = require("contentful");
 
-export default function DesignPage() {
+export default function InnerPage({ type }) {
   const [items, setItems] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +16,7 @@ export default function DesignPage() {
     client
       .getEntries({
         content_type: "entry",
-        "fields.type": "Design"
+        "fields.type": type.toString()
       })
       .then((entry) => {
         setItems(entry.items);

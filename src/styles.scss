@@ -300,7 +300,10 @@ p {
   -webkit-font-smoothing: antialiased;
 }
 
-mark {
+code {
+  color: unset;
+  font-family: unset;
+  font-size: unset;
   padding: 2px 5px;
   border-radius: 3px;
   font-weight: 600;
@@ -335,10 +338,6 @@ mark {
 
   h3 {
     color: rgba(0,0,0,.5);
-  }
-
-  .slick-dots li span {
-    background: #333 !important;
   }
 
   .owl-nav {
