@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navigation from "../components/navigation";
-import RichText from "@madebyconnor/rich-text-to-jsx";
+import Section from "../components/section";
 const contentful = require("contentful");
 
 export default function DesignPage() {
@@ -55,28 +55,13 @@ export default function DesignPage() {
         } = item.fields;
 
         return (
-          <section style={{ backgroundColor: `#${backgroundColor}` }}>
-            <h2>{title}</h2>
-            <div className="desc">
-              <RichText richText={description} />
-            </div>
-            {gallery?.map((item) => {
-              const { title, type, images } = item.fields;
-
-              return (
-                <>
-                  <h3>{title}</h3>
-                  {images?.map((image) => {
-                    const {
-                      file: { url }
-                    } = image.fields;
-
-                    return <img src={url} alt="" />;
-                  })}
-                </>
-              );
-            })}
-          </section>
+          <Section
+            title={title}
+            type={type}
+            description={description}
+            gallery={gallery}
+            backgroundColor={backgroundColor}
+          />
         );
       })}
     </>

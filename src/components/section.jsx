@@ -1,15 +1,17 @@
 import * as images from "./../img";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
+import { Container } from "reactstrap";
+import RichText from "@madebyconnor/rich-text-to-jsx";
+import { getContrast } from "./../getContrast";
 import "./../components/slick.scss";
 import "./../components/slick-theme.scss";
 
 export default function Section({
-  bgColor = "#ffffff",
-  layout,
+  backgroundColor = "#ffffff",
   title,
-  content,
-  galleryImages
+  description,
+  gallery = []
 }) {
   const sliderOptions = {
     infinite: true,
@@ -24,15 +26,15 @@ export default function Section({
         <span>
           <div
             className="owl-dot-el-1"
-            style={{ backgroundColor: bgColor }}
+            style={{ backgroundColor: backgroundColor }}
           ></div>
           <div
             className="owl-dot-el-2"
-            style={{ backgroundColor: bgColor }}
+            style={{ backgroundColor: backgroundColor }}
           ></div>
           <div
             className="owl-dot-el-3"
-            style={{ backgroundColor: bgColor }}
+            style={{ backgroundColor: backgroundColor }}
           ></div>
         </span>
       );
@@ -72,31 +74,34 @@ export default function Section({
   };
 
   return (
-    <section className={layout} style={{ background: bgColor }}>
+    <section
+      style={{
+        backgroundColor: `#${backgroundColor}`,
+        color: getContrast(backgroundColor)
+      }}
+    >
       <h2>{title}</h2>
+      <Container fluid="lg" className="py-4 text-center">
+        <RichText richText={description} />
+      </Container>
+      {gallery?.map((item) => {
+        const { title, type, images } = item.fields;
 
-      <p className="desc" dangerouslySetInnerHTML={{ __html: content }}></p>
+        return (
+          <>
+            <h3>{title}</h3>
+            <Slider {...sliderOptions}>
+              {images?.map((image) => {
+                const {
+                  file: { url }
+                } = image.fields;
 
-      {Array.isArray(galleryImages) &&
-        Object.entries(galleryImages).map((gallery) => {
-          console.log(gallery);
-          return (
-            <>
-              <h3>
-                {(gallery[0] === "iphone" && "iPhone") ||
-                  (gallery[0] === "ipad" && "iPad") ||
-                  (gallery[0] === "desktop" && "Desktop App") ||
-                  (gallery[0] === "ipadlandscape" && "iPad Landscape")}
-              </h3>
-
-              <Slider {...sliderOptions} className={gallery[0]}>
-                {Object.entries(gallery[1]).map((image) => (
-                  <img src={images[image]} alt="" />
-                ))}
-              </Slider>
-            </>
-          );
-        })}
+                return <img src={url} alt="" />;
+              })}
+            </Slider>
+          </>
+        );
+      })}
     </section>
   );
 }
@@ -105,6 +110,6 @@ Section.propTypes = {
   bgColor: PropTypes.string,
   layout: PropTypes.string,
   title: PropTypes.string.isRequired,
-  content: PropTypes.string,
-  gallery: PropTypes.object
+  description: PropTypes.string,
+  gallery: PropTypes.array
 };

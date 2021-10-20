@@ -1,6 +1,7 @@
 import { useHistory } from "react-router";
 import HeaderInfoLink from "./header-info-link";
 import backIcon from "./../img/back_arrow.svg";
+import { Container } from "reactstrap";
 
 export default function Navigation() {
   const history = useHistory();
@@ -8,8 +9,8 @@ export default function Navigation() {
   const { name, description, headerInfoLinks } = navigationData;
 
   return (
-    <>
-      <section className="aboutme" style={{ padding: "50px 10% 50px 10%" }}>
+    <Container fluid className="aboutme py-5">
+      <Container fluid="lg">
         <div className="col-12">
           <div className="d-flex align-items-center">
             <div>
@@ -33,7 +34,7 @@ export default function Navigation() {
           className="col-12 mt-4"
           dangerouslySetInnerHTML={{ __html: description }}
         ></p>
-      </section>
-    </>
+      </Container>
+    </Container>
   );
 }
