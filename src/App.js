@@ -12,7 +12,7 @@ export default function App() {
           <FrontPage />
         </Route>
         <Route path="/designs">
-          <InnerPage type={"design"} />
+          <InnerPage type={"Design"} />
         </Route>
         <Route path="/websites">
           <InnerPage type={"website"} />

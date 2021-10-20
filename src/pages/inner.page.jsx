@@ -23,7 +23,7 @@ export default function InnerPage({ type }) {
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [setItems, type]);
 
   if (isLoading) {
     return (
