@@ -9,8 +9,8 @@ export default function DesignPage() {
 
   useEffect(() => {
     const client = contentful.createClient({
-      space: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+      space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
+      accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN
     });
 
     client
