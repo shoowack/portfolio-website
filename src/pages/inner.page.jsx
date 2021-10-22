@@ -2,17 +2,24 @@ import { useEffect, useState } from "react";
 import Navigation from "../components/navigation";
 import Section from "../components/section";
 import Footer from "../components/footer";
-const contentful = require("contentful");
+import useContentfulIntegration from "./../hooks/use-contentful-integration";
 
 export default function InnerPage({ type }) {
   const [items, setItems] = useState();
+  const [navLinks, setNavLinks] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const client = useContentfulIntegration();
 
   useEffect(() => {
-    const client = contentful.createClient({
-      space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
-      accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN
-    });
+    client
+      .getEntries({
+        content_type: "headerLinks"
+      })
+      .then((entry) => {
+        setNavLinks(entry);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
 
     client
       .getEntries({
@@ -45,9 +52,9 @@ export default function InnerPage({ type }) {
 
   return (
     <div class="wrapper" style={{ marginBottom: "355px" }}>
-      <Navigation />
+      <Navigation {...navLinks} />
 
-      {items.map((item) => (
+      {items?.map((item) => (
         <Section {...item.fields} />
       ))}
 

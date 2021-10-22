@@ -7,30 +7,37 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderInfoLink({
-  id,
-  link,
-  tooltipText,
-  icon,
-  newTab,
-  size = "lg",
-  tooltipPlacement = "top",
-  color
+  sys: { id },
+  fields: {
+    link,
+    tooltipText,
+    icon,
+    openInNewTab = false,
+    size = "lg",
+    tooltipPlacement = "top",
+    iconColor
+  }
 }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  library.add(fab, fas);
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
-  library.add(fab, fas);
 
   return (
     <>
-      <a href={link} target={newTab && "_blank"} id={id}>
-        <FontAwesomeIcon icon={icon} size={size} color={color} />
+      <a
+        href={link}
+        target={openInNewTab && "_blank"}
+        rel="noreferrer"
+        id={`tooltip-${id}`}
+      >
+        <FontAwesomeIcon icon={icon.split(",")} size={size} color={iconColor} />
       </a>
       {tooltipText && (
         <Tooltip
           placement={tooltipPlacement}
           isOpen={tooltipOpen}
-          target={id}
+          target={`tooltip-${id}`}
           toggle={toggle}
           dangerouslySetInnerHTML={{ __html: tooltipText }}
         />
@@ -40,10 +47,9 @@ export default function HeaderInfoLink({
 }
 
 HeaderInfoLink.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   link: PropTypes.string.isRequired,
   tooltipText: PropTypes.string,
-  icon: PropTypes.array.isRequired,
+  // icon: PropTypes.array.isRequired,
   newTab: PropTypes.bool,
   size: PropTypes.string,
   tooltipPlacement: PropTypes.string,
