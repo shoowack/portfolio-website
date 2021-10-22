@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Label, Form, Input, Button } from "reactstrap";
 
 const encode = (data) => {
@@ -10,17 +10,22 @@ const encode = (data) => {
 };
 
 export default function Footer() {
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
     message: ""
   });
 
   const handleSubmit = (e) => {
+    setIsLoading(true);
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact-me", ...form })
-    }).catch((error) => alert(error));
+    })
+      .then(setIsLoading(false))
+      .catch((error) => alert(error));
 
     e.preventDefault();
   };
@@ -43,6 +48,7 @@ export default function Footer() {
               onSubmit={handleSubmit}
               className="pt-4 pb-5"
               data-netlify-recaptcha="true"
+              disabled={isLoading}
             >
               <Row className="mt-2">
                 <Col sm={6} className=" text-right">
@@ -77,13 +83,22 @@ export default function Footer() {
               </Row>
               <Row className="mt-2">
                 <Col sm={{ offset: 6, size: 4 }}>
-                  <Button color={"primary"}>
+                  <Button color={"primary"} disabled={isLoading}>
                     Send
-                    <FontAwesomeIcon
-                      icon={faPaperPlane}
-                      size={"sm"}
-                      className={"ml-2"}
-                    />
+                    {isLoading ? (
+                      <FontAwesomeIcon
+                        icon={faCircleNotch}
+                        size="sm"
+                        spin
+                        className="ml-2"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faPaperPlane}
+                        size={"sm"}
+                        className={"ml-2"}
+                      />
+                    )}
                   </Button>
                 </Col>
               </Row>
