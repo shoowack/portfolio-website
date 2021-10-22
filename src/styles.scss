@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:900');
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,600');
 
+
 .site-main {
   display: flex;
   justify-content: center;
@@ -14,7 +15,7 @@
   flex-direction: column;
 
   @include media-breakpoint-up(md) {
-    flex-direction: row;
+    // flex-direction: row;
   }
 
   @include media-breakpoint-up(md) {
@@ -311,6 +312,12 @@ code {
   white-space: nowrap;
 }
 
+.lighter {
+  code {
+    color: #000;
+  }  
+}
+
 .darker {
   hr {
     width: 80%;
@@ -396,4 +403,47 @@ video {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 35px 55px rgba(0,0,0,0.08), 0 25px 63px rgba(0,0,0,0.08);
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+  z-index:2;
+  box-shadow: 0 10px 60px rgba(0,0,0,.5);
+}
+
+.footer {
+  background: #333;
+  color: #fff;
+  position: fixed;
+  display: block;
+  bottom: 0;
+  z-index: -1;
+  padding: 4em 0 0 0;
+  width:100%;
+}
+
+.wpcf7 {
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    background-color: #444;
+    color: #fff;
+    border: none;
+  }
+  textarea {
+    resize: none;
+  }
+  input[type="submit"] {
+    background-color: darken(#007bff, 20%);
+    border: none;
+    color: darken(#fff, 20%);
+  }
+  .sendlabel {
+    width:auto !important;
+
+    a {
+      color: #fff;
+    }
+  }
 }

@@ -1,7 +1,6 @@
-import * as images from "./../img";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import RichText from "@madebyconnor/rich-text-to-jsx";
 import { getContrast } from "./../getContrast";
 import "./../components/slick.scss";
@@ -92,38 +91,48 @@ export default function Section({
   };
 
   return (
-    <section
+    <Container
+      fluid
       style={{
-        backgroundColor: `#${backgroundColor}`,
-        color: getContrast(backgroundColor)
+        backgroundColor: `#${backgroundColor}`
       }}
+      className={`py-5 px-md-0 ${getContrast(backgroundColor)}`}
     >
-      <h2>{title}</h2>
-      <Container fluid="lg" className="py-4 text-center">
-        <RichText richText={description} />
-      </Container>
-      {gallery?.map((item) => {
-        const { title, type, images } = item.fields;
+      <Row>
+        <Col md={12}>
+          <h2>{title}</h2>
+        </Col>
+        <Col md={12}>
+          <Container fluid="lg" className="py-4 text-center">
+            <RichText richText={description} />
+          </Container>
+        </Col>
+        <Col md={12}>
+          {gallery?.map((item, i) => {
+            const { title, type, images } = item.fields;
 
-        return (
-          <>
-            <h3>{title}</h3>
-            <Slider
-              {...sliderOptions}
-              className={type.replace(/ /g, "-").toLowerCase()}
-            >
-              {images?.map((image) => {
-                const {
-                  file: { url }
-                } = image.fields;
+            return (
+              <>
+                <h3>{title}</h3>
+                <Slider
+                  {...sliderOptions}
+                  className={type.replace(/ /g, "-").toLowerCase()}
+                >
+                  {images?.map((image) => {
+                    const {
+                      file: { url }
+                    } = image.fields;
 
-                return <img src={url} alt="" />;
-              })}
-            </Slider>
-          </>
-        );
-      })}
-    </section>
+                    return <img src={url} alt="" />;
+                  })}
+                </Slider>
+                {i !== gallery.length - 1 && <hr />}
+              </>
+            );
+          })}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

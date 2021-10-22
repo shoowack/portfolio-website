@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navigation from "../components/navigation";
 import Section from "../components/section";
+import Footer from "../components/footer";
 const contentful = require("contentful");
 
 export default function InnerPage({ type }) {
@@ -42,7 +43,7 @@ export default function InnerPage({ type }) {
   }
 
   return (
-    <>
+    <div class="wrapper" style={{ marginBottom: "300px" }}>
       <Navigation />
 
       {items.map((item) => {
@@ -64,6 +65,8 @@ export default function InnerPage({ type }) {
           />
         );
       })}
-    </>
+
+      <Footer />
+    </div>
   );
 }

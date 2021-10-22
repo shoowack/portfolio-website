@@ -33,5 +33,5 @@ export const getContrast = (color) => {
   let yiq = (r * 299 + g * 587 + b * 114) / 1000;
 
   // Check contrast
-  return yiq >= 128 ? "#000" : "#fff";
+  return yiq >= 128 ? "darker" : "lighter";
 };
