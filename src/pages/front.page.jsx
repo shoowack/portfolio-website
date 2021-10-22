@@ -1,38 +1,76 @@
-import * as images from "./../img";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import useContentfulIntegration from "./../hooks/use-contentful-integration";
 
 export default function FrontPage() {
-  const frontPageData = require("./../data/front-page-data.json");
+  const [items, setItems] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const client = useContentfulIntegration();
+
+  useEffect(() => {
+    client
+      .getEntries({
+        content_type: "section"
+      })
+      .then((entry) => {
+        setItems(entry.items);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, [setItems]);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="site-main">
-      {frontPageData.map((section, index) => {
+      {items.map((section, index) => {
         const {
           link,
           openInNewWidnow,
           title,
           subscript,
           superscript,
-          bgImg
-        } = section;
+          backgroundImage: {
+            fields: {
+              file: { url }
+            }
+          }
+        } = section.fields;
 
         return (
-          <a
-            key={index}
-            href={link}
+          <Link
+            to={link}
             target={openInNewWidnow && `_blank`}
             className="section"
+            key={index}
           >
-            <div className="section-title">
-              {title && <h1>{title}</h1>}
-              {subscript && <h3>{subscript}</h3>}
-            </div>
-            <div className="section-description">
-              <p>{superscript}</p>
-            </div>
-            {bgImg && (
-              <img className="section-bg-img" src={images[bgImg]} alt="" />
+            {title && subscript && (
+              <div className="section-title">
+                {title && <h1>{title}</h1>}
+                {subscript && <h3>{subscript}</h3>}
+              </div>
             )}
-          </a>
+            {superscript && (
+              <div className="section-description">
+                <p>{superscript}</p>
+              </div>
+            )}
+            {url && <img className="section-bg-img" src={url} alt="" />}
+          </Link>
         );
       })}
     </div>
