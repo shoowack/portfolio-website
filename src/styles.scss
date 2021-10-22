@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/mixins/_gradients.scss";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:900');
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,600');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,500,600');
 
 
 .site-main {
@@ -296,6 +296,7 @@ h3 {
 p {
   font-size: 1.25em;
   line-height: 1.5;
+  font-weight: 300;
   font-family: 'Raleway', Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -397,6 +398,39 @@ code {
   }
 }
 
+// [class*='col-'] {
+//   background: rgba(0, 0, 0, .1);
+// }
+
+label {
+  font-family: "Raleway", Arial, sans-serif;
+  margin-top: 6px;
+}
+
+
+.form-control {
+  font-family: "Raleway", Arial, sans-serif;
+  font-weight: 500;
+  color: #fff;
+  border: none !important;
+  background: #424348;
+  transition: .25s all;
+
+  &:focus {
+    background: #a2cfff0f;
+    color: #fff;
+    box-shadow: 0 0 0 2px #007bff;
+  }
+
+  &::placeholder {
+    color: rgba(105, 105, 105, 1);
+  }
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: 0 0 0 2px rgb(38 143 255 / 50%);
+}
+
 video {
   display: block;
   margin: 0 auto;
@@ -413,7 +447,7 @@ video {
 }
 
 .footer {
-  background: #333;
+  background: #2c2d30;
   color: #fff;
   position: fixed;
   display: block;
@@ -421,29 +455,4 @@ video {
   z-index: -1;
   padding: 4em 0 0 0;
   width:100%;
-}
-
-.wpcf7 {
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    background-color: #444;
-    color: #fff;
-    border: none;
-  }
-  textarea {
-    resize: none;
-  }
-  input[type="submit"] {
-    background-color: darken(#007bff, 20%);
-    border: none;
-    color: darken(#fff, 20%);
-  }
-  .sendlabel {
-    width:auto !important;
-
-    a {
-      color: #fff;
-    }
-  }
 }

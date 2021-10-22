@@ -1,19 +1,7 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  FormGroup,
-  Label,
-  Form,
-  Input,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { Container, Row, Col, Label, Form, Input, Button } from "reactstrap";
 
 const encode = (data) => {
   return Object.keys(data)
@@ -22,9 +10,7 @@ const encode = (data) => {
 };
 
 export default function Footer() {
-  const [modalShow, setModalShow] = useState(false);
   const [form, setForm] = useState({
-    name: "",
     email: "",
     message: ""
   });
@@ -33,10 +19,8 @@ export default function Footer() {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "booking-info", ...form })
-    })
-      .then(() => setModalShow(true))
-      .catch((error) => alert(error));
+      body: encode({ "form-name": "contact-me", ...form })
+    }).catch((error) => alert(error));
 
     e.preventDefault();
   };
@@ -45,81 +29,67 @@ export default function Footer() {
     setForm((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  const { email, name, message } = form;
+  const { email, message } = form;
 
   return (
-    <div class="footer">
-      <Container fluid>
-        <Container>
-          <Form
-            onSubmit={handleSubmit}
-            className="px-md-5 pb-md-4"
-            data-netlify-recaptcha="true"
-          >
-            <Row>
-              <Col sm={{ offset: 1, size: 8 }}>
-                <Row>
-                  <Col sm={6} className=" text-right">
-                    <Label className="ml-2">Your Name:</Label>
-                  </Col>
-                  <Col sm={6}>
-                    <Input
-                      type="text"
-                      placeholder={"John Doe"}
-                      required
-                      name="name"
-                      value={name}
-                      onChange={(e) => handleChange(e)}
-                    />
-                  </Col>
-                </Row>
-                <Row className="mt-2">
-                  <Col sm={6} className=" text-right">
-                    <Label className="ml-2">Your Email:</Label>
-                  </Col>
-                  <Col sm={6}>
-                    <Input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="email@domain.com"
-                      value={email}
-                      onChange={(e) => handleChange(e)}
-                    />
-                  </Col>
-                </Row>
-                <Row className="mt-2">
-                  <Col sm={6} className=" text-right">
-                    <Label className="ml-2">Your Message:</Label>
-                  </Col>
+    <div class="footer container-fluid">
+      <Container>
+        <Row>
+          <Col sm={12}>
+            <h2>Contact</h2>
+          </Col>
+          <Col sm={12}>
+            <Form
+              onSubmit={handleSubmit}
+              className="pt-4 pb-5"
+              data-netlify-recaptcha="true"
+            >
+              <Row className="mt-2">
+                <Col sm={6} className=" text-right">
+                  <Label className="ml-2">Your Email:</Label>
+                </Col>
+                <Col sm={4}>
+                  <Input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="email@domain.com"
+                    value={email}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Col>
+              </Row>
+              <Row className="mt-2">
+                <Col sm={6} className=" text-right">
+                  <Label className="ml-2">Your Message:</Label>
+                </Col>
 
-                  <Col sm={6}>
-                    <textarea
-                      rows={3}
-                      required
-                      name="message"
-                      className="form-control"
-                      value={message}
-                      onChange={(e) => handleChange(e)}
-                    ></textarea>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row className="mt-2">
-              <Col sm={{ offset: 5, size: 8 }}>
-                <Button type="submit" className="ml-auto">
-                  {/* <FontAwesomeIcon
-                            icon={faPaperPlane}
-                            size={"sm"}
-                            className={"mr-2"}
-                          /> */}
-                  Send
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </Container>
+                <Col sm={4}>
+                  <textarea
+                    rows={3}
+                    required
+                    name="message"
+                    className="form-control"
+                    value={message}
+                    onChange={(e) => handleChange(e)}
+                  ></textarea>
+                </Col>
+              </Row>
+              <Row className="mt-2">
+                <Col sm={{ offset: 6, size: 4 }}>
+                  <Button color={"primary"}>
+                    Send
+                    <FontAwesomeIcon
+                      icon={faPaperPlane}
+                      size={"sm"}
+                      className={"ml-2"}
+                    />
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     </div>
   );

@@ -43,7 +43,7 @@ export default function InnerPage({ type }) {
   }
 
   return (
-    <div class="wrapper" style={{ marginBottom: "300px" }}>
+    <div class="wrapper" style={{ marginBottom: "355px" }}>
       <Navigation />
 
       {items.map((item) => {
