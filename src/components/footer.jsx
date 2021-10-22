@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faPaperPlane,
+  faCircleNotch
+} from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Label, Form, Input, Button } from "reactstrap";
 
 const encode = (data) => {
@@ -11,6 +15,7 @@ const encode = (data) => {
 
 export default function Footer() {
   const [isLoading, setIsLoading] = useState(false);
+  const [sentState, setSentState] = useState(false);
   const [form, setForm] = useState({
     email: "",
     message: ""
@@ -24,7 +29,24 @@ export default function Footer() {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact-me", ...form })
     })
-      .then(setIsLoading(false))
+      .then(() => {
+        setIsLoading(true);
+        setSentState(false);
+
+        setTimeout(() => {
+          setIsLoading(false);
+          setForm({
+            email: "",
+            message: ""
+          });
+
+          setSentState(true);
+
+          setTimeout(() => {
+            setSentState(false);
+          }, 5000);
+        }, 2000);
+      })
       .catch((error) => alert(error));
 
     e.preventDefault();
@@ -46,9 +68,8 @@ export default function Footer() {
           <Col sm={12}>
             <Form
               onSubmit={handleSubmit}
-              className="pt-4 pb-5"
+              className="pt-4 pb-4"
               data-netlify-recaptcha="true"
-              disabled={isLoading}
             >
               <Row className="mt-2">
                 <Col sm={6} className=" text-right">
@@ -62,6 +83,7 @@ export default function Footer() {
                     placeholder="email@domain.com"
                     value={email}
                     onChange={(e) => handleChange(e)}
+                    disabled={isLoading}
                   />
                 </Col>
               </Row>
@@ -78,28 +100,51 @@ export default function Footer() {
                     className="form-control"
                     value={message}
                     onChange={(e) => handleChange(e)}
+                    disabled={isLoading}
                   ></textarea>
                 </Col>
               </Row>
               <Row className="mt-2">
                 <Col sm={{ offset: 6, size: 4 }}>
-                  <Button color={"primary"} disabled={isLoading}>
-                    Send
+                  <Button
+                    color={sentState ? "success" : "primary"}
+                    disabled={isLoading}
+                  >
                     {isLoading ? (
-                      <FontAwesomeIcon
-                        icon={faCircleNotch}
-                        size="sm"
-                        spin
-                        className="ml-2"
-                      />
+                      <>
+                        Sending
+                        <FontAwesomeIcon
+                          icon={faCircleNotch}
+                          size="sm"
+                          spin
+                          className="ml-2"
+                        />
+                      </>
+                    ) : sentState ? (
+                      <>
+                        Sent
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          size={"sm"}
+                          className={"ml-2"}
+                        />
+                      </>
                     ) : (
-                      <FontAwesomeIcon
-                        icon={faPaperPlane}
-                        size={"sm"}
-                        className={"ml-2"}
-                      />
+                      <>
+                        Send
+                        <FontAwesomeIcon
+                          icon={faPaperPlane}
+                          size={"sm"}
+                          className={"ml-2"}
+                        />
+                      </>
                     )}
                   </Button>
+                </Col>
+              </Row>
+              <Row className="mt-2">
+                <Col sm={{ offset: 6, size: 4 }}>
+                  {sentState ? "Your message has been sent!" : <br />}
                 </Col>
               </Row>
             </Form>

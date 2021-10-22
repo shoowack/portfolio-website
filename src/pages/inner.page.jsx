@@ -17,7 +17,8 @@ export default function InnerPage({ type }) {
     client
       .getEntries({
         content_type: "entry",
-        "fields.type": type.toString()
+        "fields.type": type.toString(),
+        order: "fields.order"
       })
       .then((entry) => {
         setItems(entry.items);
@@ -46,25 +47,9 @@ export default function InnerPage({ type }) {
     <div class="wrapper" style={{ marginBottom: "355px" }}>
       <Navigation />
 
-      {items.map((item) => {
-        const {
-          title,
-          type,
-          description,
-          gallery,
-          backgroundColor
-        } = item.fields;
-
-        return (
-          <Section
-            title={title}
-            type={type}
-            description={description}
-            gallery={gallery}
-            backgroundColor={backgroundColor}
-          />
-        );
-      })}
+      {items.map((item) => (
+        <Section {...item.fields} />
+      ))}
 
       <Footer />
     </div>

@@ -43,15 +43,15 @@ export default function Section({
         <span>
           <div
             className="owl-dot-el-1"
-            style={{ backgroundColor: `#${backgroundColor}` }}
+            style={{ backgroundColor: backgroundColor }}
           ></div>
           <div
             className="owl-dot-el-2"
-            style={{ backgroundColor: `#${backgroundColor}` }}
+            style={{ backgroundColor: backgroundColor }}
           ></div>
           <div
             className="owl-dot-el-3"
-            style={{ backgroundColor: `#${backgroundColor}` }}
+            style={{ backgroundColor: backgroundColor }}
           ></div>
         </span>
       );
@@ -94,7 +94,7 @@ export default function Section({
     <Container
       fluid
       style={{
-        backgroundColor: `#${backgroundColor}`
+        backgroundColor: backgroundColor
       }}
       className={`py-5 px-md-0 ${getContrast(backgroundColor)}`}
     >
