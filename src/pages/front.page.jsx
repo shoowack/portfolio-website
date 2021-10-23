@@ -40,7 +40,7 @@ export default function FrontPage() {
       {items.map((section, index) => {
         const {
           link,
-          openInNewWidnow,
+          openInNewTab,
           title,
           subscript,
           superscript,
@@ -54,7 +54,7 @@ export default function FrontPage() {
         return (
           <Link
             to={link}
-            target={openInNewWidnow && `_blank`}
+            target={openInNewTab && "_blank"}
             className="section"
             key={index}
           >
