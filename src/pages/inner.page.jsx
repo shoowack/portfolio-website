@@ -51,7 +51,7 @@ export default function InnerPage({ type }) {
   }
 
   return (
-    <div class="wrapper" style={{ marginBottom: "355px" }}>
+    <div class="wrapper" style={{ marginBottom: "360px" }}>
       <Navigation {...navLinks} />
 
       {items?.map((item) => (

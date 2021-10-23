@@ -3,7 +3,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:900');
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,500,600');
-
+@font-face {
+  font-family: 'Alliance';
+  src: local('Alliance No 1 Black'), local('Alliance-No-1-Black'),
+      url('./fonts/AllianceNo1-Black.woff2') format('woff2'),
+      url('./fonts/AllianceNo1-Black.woff') format('woff'),
+      url('./fonts/AllianceNo1-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
 
 .site-main {
   display: flex;
@@ -278,19 +286,28 @@ section {
   }
 }
 
-h1, h2, h3 {
+h3 {
   font-family: 'Raleway', Arial, sans-serif;
   font-weight: 100;
   text-align: center;
   margin: 0;
+  margin-top: 20px;
+}
+
+h1, h2 {
+  font-family: 'Alliance', Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  text-align: center;
+  margin: 0;
+}
+
+h1 {
+  font-size: 65px;
 }
 
 h2 {
-  font-size: 3em;
-}
-
-h3 {
-  margin-top: 20px;
+  font-size: 55px;
 }
 
 p {
@@ -313,23 +330,20 @@ code {
   white-space: nowrap;
 }
 
-.lighter {
-  code {
-    color: #000;
-  }  
+hr {
+  width: 80%;
+  border: 0;
+  height: 1px;
+  margin: 10px auto;
+
+  @include media-breakpoint-up(md) {
+    margin: 50px auto;
+  }
 }
 
 .darker {
   hr {
-    width: 80%;
     background: rgba(0, 0, 0, .1);
-    border: 0;
-    height: 1px;
-    margin: 10px auto;
-
-    @include media-breakpoint-up(md) {
-      margin: 50px auto;
-    }
   }
 
   h2, p{
@@ -347,16 +361,6 @@ code {
   h3 {
     color: rgba(0,0,0,.5);
   }
-
-  .owl-nav {
-    [class*='owl-'] {
-      background: #333;
-
-      &:hover {
-        background: #333;
-      }
-    }
-  }
 }
 
 .box {
@@ -367,6 +371,14 @@ code {
 }
 
 .lighter {
+  hr {
+    background: rgba(255, 255, 255, .1);
+  }
+  
+  code {
+    color: #000;
+  }  
+  
   h2, p {
     color: #fff;
   }
@@ -385,17 +397,6 @@ code {
   .slick-dots li span {
     background: #fff !important;
   }
-
-  .owl-nav {
-    [class*='owl-'] {
-      color: #000 !important;
-      background: #fff;
-
-      &:hover {
-        background: #fff;
-      }
-    }
-  }
 }
 
 // [class*='col-'] {
@@ -406,7 +407,6 @@ label {
   font-family: "Raleway", Arial, sans-serif;
   margin-top: 6px;
 }
-
 
 .form-control {
   font-family: "Raleway", Arial, sans-serif;

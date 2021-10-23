@@ -1,10 +1,12 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 import { Container, Row, Col } from "reactstrap";
 import RichText from "@madebyconnor/rich-text-to-jsx";
 import { getContrast } from "./../getContrast";
-import "./../components/slick.scss";
-import "./../components/slick-theme.scss";
+import FsLightbox from "fslightbox-react";
+import("./../components/slick.scss");
+import("./../components/slick-theme.scss");
 
 // function SampleNextArrow(props) {
 //   const { className, style, onClick } = props;
@@ -30,6 +32,10 @@ export default function Section({
   description,
   gallery = []
 }) {
+  console.log(gallery);
+
+  const [toggler, setToggler] = useState(false);
+  const [productIndex, setProductIndex] = useState(0);
   const sliderOptions = {
     infinite: true,
     slidesToShow: 6,
@@ -98,15 +104,22 @@ export default function Section({
       }}
       className={`py-5 px-md-0 ${getContrast(backgroundColor)}`}
     >
-      <Row>
+      <FsLightbox
+        toggler={toggler}
+        // sources={productsImages[productIndex]}
+        key={productIndex}
+      />
+
+      <Row className="py-5">
         <Col md={12}>
           <h2>{title}</h2>
         </Col>
         <Col md={12}>
-          <Container fluid="lg" className="py-4 text-center">
+          <Container fluid="lg" className="pt-2 pb-4 text-center">
             <RichText richText={description} />
           </Container>
         </Col>
+
         <Col md={12}>
           {gallery?.map((item, i) => {
             const { title, type, images } = item.fields;
@@ -123,7 +136,18 @@ export default function Section({
                       file: { url }
                     } = image.fields;
 
-                    return <img src={url} alt="" />;
+                    // console.log(image);
+
+                    return (
+                      <img
+                        src={url}
+                        alt=""
+                        onClick={() => {
+                          setToggler(!toggler);
+                          setProductIndex(1);
+                        }}
+                      />
+                    );
                   })}
                 </Slider>
                 {i !== gallery.length - 1 && <hr />}

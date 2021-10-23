@@ -54,7 +54,7 @@ export default function FrontPage() {
         return (
           <Link
             to={link}
-            target={openInNewTab && "_blank"}
+            target={openInNewTab ? "_blank" : ""}
             className="section"
             key={index}
           >
