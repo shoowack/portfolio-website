@@ -59,7 +59,7 @@ export default function Footer() {
   const { email, message } = form;
 
   return (
-    <div class="footer container-fluid">
+    <div className="footer container-fluid">
       <Container>
         <Row>
           <Col sm={12}>

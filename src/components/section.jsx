@@ -5,6 +5,9 @@ import { Container, Row, Col } from "reactstrap";
 import RichText from "@madebyconnor/rich-text-to-jsx";
 import { getContrast } from "./../getContrast";
 import FsLightbox from "fslightbox-react";
+import hexToRgbA from "./../hooks/hexToRgba";
+import { StickyContainer, Sticky } from "react-sticky";
+
 import("./../components/slick.scss");
 import("./../components/slick-theme.scss");
 
@@ -32,8 +35,6 @@ export default function Section({
   description,
   gallery = []
 }) {
-  console.log(gallery);
-
   const [toggler, setToggler] = useState(false);
   const [productIndex, setProductIndex] = useState(0);
   const sliderOptions = {
@@ -97,66 +98,88 @@ export default function Section({
   };
 
   return (
-    <Container
-      fluid
-      style={{
-        backgroundColor: backgroundColor
-      }}
-      className={`py-5 px-md-0 ${getContrast(backgroundColor)}`}
-    >
-      <FsLightbox
-        toggler={toggler}
-        // sources={productsImages[productIndex]}
-        key={productIndex}
-      />
+    <StickyContainer>
+      <Container
+        fluid
+        style={{
+          backgroundColor: backgroundColor
+        }}
+        className={`py-5 px-md-0 ${getContrast(backgroundColor)}`}
+      >
+        <Sticky topOffset={50}>
+          {({ style, isSticky }) => (
+            <header
+              style={{
+                ...style,
+                backgroundColor: hexToRgbA(backgroundColor),
+                zIndex: 10,
+                boxShadow: isSticky
+                  ? "0px 0px 20px -10px rgba(0,0,0,.3)"
+                  : "none",
+                backdropFilter: "blur(10px)"
+              }}
+            >
+              <Row>
+                <Col md={12}>
+                  <Container fluid="lg" className="py-2 text-center">
+                    <h2>{title}</h2>
+                  </Container>
+                </Col>
+              </Row>
+            </header>
+          )}
+        </Sticky>
 
-      <Row className="py-5">
-        <Col md={12}>
-          <h2>{title}</h2>
-        </Col>
-        <Col md={12}>
-          <Container fluid="lg" className="pt-2 pb-4 text-center">
-            <RichText richText={description} />
-          </Container>
-        </Col>
+        {/* <FsLightbox
+          toggler={toggler}
+          // sources={productsImages[productIndex]}
+          key={productIndex}
+        /> */}
 
-        <Col md={12}>
-          {gallery?.map((item, i) => {
-            const { title, type, images } = item.fields;
+        <Row className="pb-5">
+          <Col md={12}>
+            <Container fluid="lg" className="pt-2 pb-4 text-center">
+              <RichText richText={description} />
+            </Container>
+          </Col>
 
-            return (
-              <>
-                <h3>{title}</h3>
-                <Slider
-                  {...sliderOptions}
-                  className={type.replace(/ /g, "-").toLowerCase()}
-                >
-                  {images?.map((image) => {
-                    const {
-                      file: { url }
-                    } = image.fields;
+          <Col md={12}>
+            {gallery?.map((item, i) => {
+              const { title, type, images } = item.fields;
 
-                    // console.log(image);
+              return (
+                <>
+                  <h3>{title}</h3>
+                  <Slider
+                    {...sliderOptions}
+                    className={type.replace(/ /g, "-").toLowerCase()}
+                  >
+                    {images?.map((image, i) => {
+                      const {
+                        file: { url }
+                      } = image.fields;
 
-                    return (
-                      <img
-                        src={url}
-                        alt=""
-                        onClick={() => {
-                          setToggler(!toggler);
-                          setProductIndex(1);
-                        }}
-                      />
-                    );
-                  })}
-                </Slider>
-                {i !== gallery.length - 1 && <hr />}
-              </>
-            );
-          })}
-        </Col>
-      </Row>
-    </Container>
+                      return (
+                        <img
+                          key={i}
+                          src={url}
+                          alt=""
+                          onClick={() => {
+                            setToggler(!toggler);
+                            setProductIndex(1);
+                          }}
+                        />
+                      );
+                    })}
+                  </Slider>
+                  {i !== gallery.length - 1 && <hr />}
+                </>
+              );
+            })}
+          </Col>
+        </Row>
+      </Container>
+    </StickyContainer>
   );
 }
 

@@ -7,6 +7,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderInfoLink({
+  isLoading,
   sys: { id },
   fields: {
     link,
@@ -23,11 +24,18 @@ export default function HeaderInfoLink({
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
+  console.log(link);
+
+  if (!isLoading) {
+    return <FontAwesomeIcon icon={["fas", "circleNotch"]} color={"#fff"} />;
+  }
+
   return (
     <>
       <a
+        key={id}
         href={link}
-        target={openInNewTab && "_blank"}
+        target={openInNewTab ? "_blank" : ""}
         rel="noreferrer"
         id={`tooltip-${id}`}
       >

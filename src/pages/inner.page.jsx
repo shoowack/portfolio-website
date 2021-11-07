@@ -51,8 +51,8 @@ export default function InnerPage({ type }) {
   }
 
   return (
-    <div class="wrapper" style={{ marginBottom: "360px" }}>
-      <Navigation {...navLinks} />
+    <div className="wrapper" style={{ marginBottom: "360px" }}>
+      <Navigation {...navLinks} isLoading={isLoading} />
 
       {items?.map((item) => (
         <Section {...item.fields} />
