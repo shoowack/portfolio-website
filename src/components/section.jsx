@@ -121,7 +121,10 @@ export default function Section({
             >
               <Row>
                 <Col md={12}>
-                  <Container fluid="lg" className="py-2 text-center">
+                  <Container
+                    fluid="lg"
+                    className={`py-2 text-center ${isSticky ? "sticky" : ""}`}
+                  >
                     <h2>{title}</h2>
                   </Container>
                 </Col>
@@ -138,7 +141,7 @@ export default function Section({
 
         <Row className="pb-5">
           <Col md={12}>
-            <Container fluid="lg" className="pt-2 pb-4 text-center">
+            <Container fluid="lg" className="pb-4 text-center">
               <RichText richText={description} />
             </Container>
           </Col>
